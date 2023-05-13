@@ -7,6 +7,10 @@ using UnityEngine;
 public class AppsFlyerObjectEditor : Editor
 {
 
+    SerializedProperty First;
+    SerializedProperty Sec;
+    SerializedProperty Thr;
+    
     SerializedProperty devKey;
     SerializedProperty appID;
     SerializedProperty UWPAppID;
@@ -23,6 +27,9 @@ public class AppsFlyerObjectEditor : Editor
         macOSAppID = serializedObject.FindProperty("macOSAppID");
         isDebug = serializedObject.FindProperty("isDebug");
         getConversionData = serializedObject.FindProperty("getConversionData");
+        First = serializedObject.FindProperty("First");
+        Sec = serializedObject.FindProperty("Sec");
+        Thr = serializedObject.FindProperty("Thr");
     }
 
 
@@ -40,6 +47,9 @@ public class AppsFlyerObjectEditor : Editor
         EditorGUILayout.PropertyField(appID);
         EditorGUILayout.PropertyField(UWPAppID);
         EditorGUILayout.PropertyField(macOSAppID);
+        EditorGUILayout.PropertyField(First);
+        EditorGUILayout.PropertyField(Sec);
+        EditorGUILayout.PropertyField(Thr);
         EditorGUILayout.Separator();
         EditorGUILayout.HelpBox("Enable get conversion data to allow your app to recive deeplinking callbacks", MessageType.None);
         EditorGUILayout.PropertyField(getConversionData);
