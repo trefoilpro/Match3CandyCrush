@@ -79,20 +79,6 @@ namespace MatchThreeEngine
 			OnMatch += (type, count) => score.AddScore(count * type.value);
 		}
 
-		private void Update()
-		{
-			if (Input.GetKeyDown(KeyCode.Space))
-			{
-				var bestMove = TileDataMatrixUtility.FindBestMove(Matrix);
-
-				if (bestMove != null)
-				{
-					Select(GetTile(bestMove.X1, bestMove.Y1));
-					Select(GetTile(bestMove.X2, bestMove.Y2));
-				}
-			}
-		}
-
 		public void RestartLevel()
 		{
 			for (var y = 0; y < rows.Length; y++)
