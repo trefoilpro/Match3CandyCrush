@@ -26,11 +26,15 @@ namespace MatchThreeEngine
 
 		[SerializeField] private bool ensureNoStartingMatches;
 
+		[SerializeField] private Score score;
+
 		private readonly List<Tile> _selection = new List<Tile>();
 
 		private bool _isSwapping;
 		private bool _isMatching;
 		private bool _isShuffling;
+
+		
 
 		public event Action<TileTypeAsset, int> OnMatch;
 
@@ -63,14 +67,16 @@ namespace MatchThreeEngine
 					tile.y = y;
 
 					tile.Type = tileTypes[Random.Range(0, tileTypes.Length)];
-
-					tile.button.onClick.AddListener(() => Select(tile));
 				}
 			}
 
 			if (ensureNoStartingMatches) StartCoroutine(EnsureNoStartingMatches());
+			else
+			{
+				AddTileListenerOnStart();
+			}
 
-			OnMatch += (type, count) => Debug.Log($"Matched {count}x {type.name}.");
+			OnMatch += (type, count) => score.AddScore(count * type.value);
 		}
 
 		private void Update()
@@ -87,6 +93,36 @@ namespace MatchThreeEngine
 			}
 		}
 
+		public void RestartLevel()
+		{
+			for (var y = 0; y < rows.Length; y++)
+			{
+				for (var x = 0; x < rows.Max(row => row.tiles.Length); x++)
+				{
+					if (rows[y].tiles[x].GetStartTileTypeAsset() == null)
+						return;
+
+					rows[y].tiles[x].Type = rows[y].tiles[x].GetStartTileTypeAsset();
+				}
+			}
+			
+			score.ResetScore();
+		}
+		
+		private void AddTileListenerOnStart()
+		{
+			for (var y = 0; y < rows.Length; y++)
+			{
+				for (var x = 0; x < rows.Max(row => row.tiles.Length); x++)
+				{
+					var tile = GetTile(x, y);
+
+					tile.button.onClick.AddListener(() => Select(tile));
+					tile.SetStartTileTypeAsset(tile.Type);
+				}
+			}
+		}
+
 		private IEnumerator EnsureNoStartingMatches()
 		{
 			var wait = new WaitForEndOfFrame();
@@ -97,6 +133,8 @@ namespace MatchThreeEngine
 
 				yield return wait;
 			}
+
+			AddTileListenerOnStart();
 		}
 
 		private Tile GetTile(int x, int y) => rows[y].tiles[x];

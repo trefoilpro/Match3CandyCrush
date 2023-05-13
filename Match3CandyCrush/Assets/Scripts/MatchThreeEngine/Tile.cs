@@ -14,6 +14,11 @@ namespace MatchThreeEngine
 
 		private TileTypeAsset _type;
 
+		private TileTypeAsset _startType = null;
+
+		public TileTypeAsset GetStartTileTypeAsset() => _startType;
+		public void SetStartTileTypeAsset(TileTypeAsset tileTypeAsset) => _startType = tileTypeAsset;
+
 		public TileTypeAsset Type
 		{
 			get => _type;
