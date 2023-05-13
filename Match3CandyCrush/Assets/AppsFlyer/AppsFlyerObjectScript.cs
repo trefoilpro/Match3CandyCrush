@@ -1,13 +1,19 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using AppsFlyerSDK;
+using UnityEngine.UI;
 
 // This class is intended to be used the the AppsFlyerObject.prefab
 
 public class AppsFlyerObjectScript : MonoBehaviour , IAppsFlyerConversionData
 {
 
+    public Text First;
+    public Text Sec;
+    public Text Thr;
     // These fields are set from the editor so do not modify!
     //******************************//
     public string devKey;
@@ -24,6 +30,7 @@ public class AppsFlyerObjectScript : MonoBehaviour , IAppsFlyerConversionData
         // These fields are set from the editor so do not modify!
         //******************************//
         AppsFlyer.setIsDebug(isDebug);
+        Test(First);
 #if UNITY_WSA_10_0 && !UNITY_EDITOR
         AppsFlyer.initSDK(devKey, UWPAppID, getConversionData ? this : null);
 #elif UNITY_STANDALONE_OSX && !UNITY_EDITOR
@@ -32,8 +39,29 @@ public class AppsFlyerObjectScript : MonoBehaviour , IAppsFlyerConversionData
         AppsFlyer.initSDK(devKey, appID, getConversionData ? this : null);
 #endif
         //******************************/
- 
+      
+       // AppsFlyer.startSDK();
+       
+        Test(Sec);
+
         AppsFlyer.startSDK();
+      
+        Test(Thr);
+    }
+
+    private static void Test(Text text)
+    {
+        string appsFlyerUID = AppsFlyer.getAppsFlyerId();
+        if (!string.IsNullOrEmpty(appsFlyerUID))
+        {
+            text.text = "AppsFlyer UID: " + appsFlyerUID;
+            Debug.Log("AppsFlyer UID: " + appsFlyerUID);
+        }
+        else
+        {
+            text.text = "Failed to get AppsFlyer UID";
+            Debug.LogWarning("Failed to get AppsFlyer UID");
+        }
     }
 
 
@@ -47,6 +75,7 @@ public class AppsFlyerObjectScript : MonoBehaviour , IAppsFlyerConversionData
     {
         AppsFlyer.AFLog("didReceiveConversionData", conversionData);
         Dictionary<string, object> conversionDataDictionary = AppsFlyer.CallbackStringToDictionary(conversionData);
+
         // add deferred deeplink logic here
     }
 
