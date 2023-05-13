@@ -4,17 +4,17 @@ using UnityEngine;
 public class Score : MonoBehaviour
 {
     [SerializeField] private TMP_Text _scoreText;
-    private int _scoreNumber;
+    public int ScoreNumber { get; private set; }
 
     public void AddScore(int score)
     {
-        _scoreNumber += score;
-        _scoreText.text = _scoreNumber.ToString();
+        ScoreNumber += score;
+        _scoreText.text = ScoreNumber.ToString();
     }
 
     public void ResetScore()
     {
-        _scoreNumber = 0;
-        _scoreText.text = _scoreNumber.ToString();
+        ScoreNumber = 0;
+        _scoreText.text = ScoreNumber.ToString();
     }
 }
