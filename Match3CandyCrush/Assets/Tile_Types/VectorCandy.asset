@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 51d742e6c1f64287bcbf4ece0ac2dc56, type: 3}
-  m_Name: Pig
+  m_Name: VectorCandy
   m_EditorClassIdentifier: 
-  id: 4
+  id: 3
   value: 5
-  sprite: {fileID: 21300000, guid: 0b74526da9456e44690a97edc79499ea, type: 3}
+  sprite: {fileID: 21300000, guid: 1d173b665edcf36408a1e38078b83d18, type: 3}

@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 51d742e6c1f64287bcbf4ece0ac2dc56, type: 3}
-  m_Name: Parrot
+  m_Name: "\u0421orn\u0421andy"
   m_EditorClassIdentifier: 
-  id: 3
+  id: 2
   value: 5
-  sprite: {fileID: 21300000, guid: 42490f7b2e9053348950d09563d16826, type: 3}
+  sprite: {fileID: 21300000, guid: 467c59ebbd90bc74584dd8c85c5a2873, type: 3}
